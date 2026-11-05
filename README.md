@@ -7,7 +7,17 @@ A barbearia tem um painel para cuidar dos serviços, da equipe, dos horários e 
 - **Back-end:** C# / ASP.NET Core (.NET 10) + MySQL 8
 - **Front-end:** React + TypeScript (Vite)
 
-## Como rodar
+## Só quero testar (sem mexer em código)
+
+1. Instale o **MySQL 8.0**: <https://dev.mysql.com/downloads/installer/> (escolha "Server only" e crie uma senha para o root).
+2. Baixe o **[Barbearia-teste.zip](https://github.com/KawanMorais/GerenciadorBarbearias/releases/latest/download/Barbearia-teste.zip)** e extraia (botão direito → Extrair tudo).
+3. Dê dois cliques em **`Iniciar.bat`** e digite a senha do root do MySQL.
+   Se o Windows avisar "O Windows protegeu o computador": **Mais informações** → **Executar assim mesmo**.
+4. O site abre sozinho no navegador. Login de teste: `demo@barbearia.com` / `demo1234`.
+
+Não precisa instalar .NET nem Node.
+
+## Como rodar pelo código
 
 São duas partes que ficam abertas ao mesmo tempo: a **API** (back-end) e o **site** (front-end).
 
