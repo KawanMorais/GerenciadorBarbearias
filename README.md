@@ -7,11 +7,74 @@ A barbearia tem um painel para cuidar dos serviços, da equipe, dos horários e 
 - **Back-end:** C# / ASP.NET Core (.NET 10) + MySQL 8
 - **Front-end:** React + TypeScript (Vite)
 
-## Testar
+## Como rodar
 
-Baixe o `Barbearia-teste.zip` em **Releases** e siga o `LEIA-ME.txt`. Só precisa ter o MySQL instalado.
+São duas partes que ficam abertas ao mesmo tempo: a **API** (back-end) e o **site** (front-end).
 
-## Rodar o código
+### 1. Instale os programas (só na primeira vez)
 
-Veja [`BackEnd/README.md`](BackEnd/README.md) e [`FrontEnd/README.md`](FrontEnd/README.md).
-Para gerar o pacote de teste, veja [`COMO-RODAR.md`](COMO-RODAR.md).
+- **.NET 10 SDK:** `winget install Microsoft.DotNet.SDK.10`
+- **Node.js:** `winget install OpenJS.NodeJS.LTS`
+- **MySQL 8.0:** <https://dev.mysql.com/downloads/installer/> (escolha "Server only" e crie uma senha para o root)
+
+Depois de instalar, feche e abra o terminal de novo.
+
+### 2. Baixe o código
+
+```bash
+git clone https://github.com/KawanMorais/GerenciadorBarbearias.git
+cd GerenciadorBarbearias
+```
+
+### 3. Configure a API (só na primeira vez)
+
+Troque `SUA_SENHA` pela senha do root do MySQL:
+
+```bash
+cd BackEnd/BarbeariaApi
+dotnet user-secrets set "ConnectionStrings:Banco" "Server=localhost;Port=3306;Database=barbearia;User=root;Password=SUA_SENHA;"
+dotnet user-secrets set "Jwt:Chave" "uma-frase-qualquer-com-mais-de-32-caracteres-123"
+```
+
+As senhas ficam guardadas no seu PC (User Secrets), fora do código.
+
+### 4. Rode a API (terminal 1)
+
+```bash
+cd BackEnd/BarbeariaApi
+dotnet run --launch-profile http
+```
+
+Espere aparecer `Now listening on: http://localhost:5222` e **deixe esse terminal aberto**.
+Na primeira vez, a API cria sozinha o banco e uma barbearia de exemplo.
+
+### 5. Rode o site (terminal 2)
+
+Abra **outro** terminal na pasta `GerenciadorBarbearias`:
+
+```bash
+cd FrontEnd
+npm install
+npm run dev
+```
+
+O `npm install` só é preciso na primeira vez. Depois abra <http://localhost:5173> no navegador.
+
+### 6. Teste
+
+- **Como cliente:** escolha a "Gêmeos Barbearia" e agende um horário.
+- **Como barbearia:** clique em "Sou barbearia" e entre com `demo@barbearia.com` / `demo1234`.
+
+Nas próximas vezes, é só repetir os passos 4 e 5.
+
+## Se der erro
+
+| Mensagem | O que fazer |
+|---|---|
+| `Falta a conexão com o MySQL` | Faça o passo 3 dentro da pasta `BackEnd/BarbeariaApi`. |
+| `Access denied for user 'root'` | Senha errada no passo 3. Rode o comando da conexão de novo. |
+| `Unable to connect to any of the specified MySQL hosts` | O MySQL está parado: Serviços do Windows → `MySQL80` → Iniciar. |
+| O site diz "Não foi possível falar com o servidor" | A API (passo 4) não está rodando. |
+| `npm` bloqueado: "execução de scripts foi desabilitada" | Rode `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` uma vez. |
+
+Mais detalhes (rotas da API, envio de e-mail, backup): [`BackEnd/README.md`](BackEnd/README.md) e [`FrontEnd/README.md`](FrontEnd/README.md).
