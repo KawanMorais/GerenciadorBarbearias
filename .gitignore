@@ -1,0 +1,26 @@
+# Arquivos do Visual Studio e gerados na compilação
+.vs/
+bin/
+obj/
+*.user
+
+# Front-end
+node_modules/
+dist/
+
+# Dados locais (fotos enviadas e backups do banco)
+BackEnd/BarbeariaApi/wwwroot/uploads/*
+!BackEnd/BarbeariaApi/wwwroot/uploads/.gitkeep
+BackEnd/BarbeariaApi/Backups/
+
+# Pacote de teste gerado (vai na Release do GitHub, não no código)
+Pacote/Barbearia-teste/
+*.zip
+
+# Configurações locais e lixo do sistema
+.env
+.env.*
+*.log
+.vscode/
+Thumbs.db
+desktop.ini

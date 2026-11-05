@@ -1,0 +1,7 @@
+﻿bin/
+obj/
+.vs/
+*.user
+BarbeariaApi/wwwroot/uploads/*
+!BarbeariaApi/wwwroot/uploads/.gitkeep
+BarbeariaApi/Backups/

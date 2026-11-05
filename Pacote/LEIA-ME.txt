@@ -1,0 +1,30 @@
+﻿NA RÉGUA - VERSÃO DE TESTE
+==========================
+
+Você só precisa instalar o MySQL. O resto já está aqui dentro.
+
+1. INSTALE O MYSQL 8.0
+   https://dev.mysql.com/downloads/installer/
+   - Escolha "Server only".
+   - Crie uma senha para o usuário "root" e anote.
+   (Se já tem o MySQL instalado, pule este passo.)
+
+2. ABRA O SITE
+   - Dê dois cliques em "Iniciar.bat".
+   - Digite a senha do root do SEU MySQL e aperte Enter.
+   - Se o Windows avisar "O Windows protegeu o computador":
+     clique em "Mais informações" e depois em "Executar assim mesmo".
+   - O site abre sozinho no navegador (http://localhost:5222).
+
+3. TESTE
+   - Como cliente: escolha a "Gêmeos Barbearia" e agende um horário.
+   - Como barbearia: clique em "Sou barbearia" e entre com
+     e-mail: demo@barbearia.com
+     senha:  demo1234
+
+Para fechar o site, feche a janela preta.
+
+SE DER ERRO
+- "Access denied": a senha do MySQL está errada. Abra o Iniciar.bat de novo.
+- "Unable to connect": o MySQL está parado. Menu Iniciar > Serviços >
+  MySQL80 > Iniciar.
