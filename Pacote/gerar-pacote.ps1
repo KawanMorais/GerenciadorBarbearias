@@ -27,6 +27,19 @@ Copy-Item (Join-Path $raiz "FrontEnd\dist\*") (Join-Path $saida "wwwroot") -Recu
 Copy-Item (Join-Path $PSScriptRoot "Iniciar.bat") $saida
 Copy-Item (Join-Path $PSScriptRoot "LEIA-ME.txt") $saida
 
+# Leva junto a conta de e-mail do User Secrets, para o envio funcionar no PC de quem testa.
+# Atenção: quem tiver o zip consegue ler essa senha.
+$segredos = dotnet user-secrets list --project (Join-Path $raiz "BackEnd\BarbeariaApi")
+$usuario = ($segredos | Where-Object { $_ -like "Email:Smtp:Usuario = *" }) -replace "^Email:Smtp:Usuario = ", ""
+$senha = ($segredos | Where-Object { $_ -like "Email:Smtp:Senha = *" }) -replace "^Email:Smtp:Senha = ", ""
+if ($usuario -and $senha) {
+    @{ Email = @{ Smtp = @{ Usuario = $usuario; Senha = $senha } } } | ConvertTo-Json -Depth 5 |
+        Set-Content (Join-Path $saida "appsettings.Production.json") -Encoding UTF8
+    Write-Host "E-mail real incluído no pacote ($usuario)." -ForegroundColor Yellow
+} else {
+    Write-Host "Sem e-mail no User Secrets: no pacote os e-mails ficam simulados." -ForegroundColor Yellow
+}
+
 Write-Host "3/3 Compactando..." -ForegroundColor Cyan
 if (Test-Path $zip) { Remove-Item $zip -Force }
 Compress-Archive -Path (Join-Path $saida "*") -DestinationPath $zip

@@ -22,6 +22,8 @@ Você só precisa instalar o MySQL. O resto já está aqui dentro.
      e-mail: demo@barbearia.com
      senha:  demo1234
 
+Se colocar seu e-mail ao agendar, você recebe a confirmação (olhe também o spam).
+
 Para fechar o site, feche a janela preta.
 
 SE DER ERRO
